@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Habit Tracking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Maitree:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  </head>
+  <body>
+    <div class="navigation">
+      <a href="index.html" class="tab">Home</a>
+      <a href="tracker.html" class="tab">Tracker</a>
+    </div>
+    <div class="instructions">
+      <h1>Start tracking your habits!</h1>
+      <p>Select the month you're tracking your habits for, and hit 'Confirm' when you're done.</p>
+      <select id="select-month">
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+      <button class="submit" onclick="changeMonth();">Confirm</button>
+      <p>To add habits to your tracker, type them into the box below and click 'Add Habit'. Please use alphanumeric characters only. Click the boxes to check habits off when you've completed them. Make sure to visit every day! Don't forget to click 'Save Habits' before you leave.</p>
+      <button class="submit" onclick="saveHabits();">Save Habits</button>
+    </div>
+    <form class="form" onsubmit="addHabit();">
+      <input type="text" id="input-habit" pattern="[a-zA-Z0-9\s]+" required>
+      <input type="submit" class='submit' value='Add Habit'>
+    </form>
+    <div class="input">
+      <h3 id="month-label">Month</h3>
+      <div id="date-container">
+        <div id="dates"></div>
+      </div>
+      <div class="tracker"></div>
+    </div>
+    <a href="https://www.freepik.com/vectors/hexagon-pattern" class="source">Background image source: Hexagon pattern vector created by starline - www.freepik.com</a>
+    <script>
+      $('.form').submit(function(submit){submit.preventDefault();});
+      var days = 30;
+      
+      function addHabit(){
+        var habit = $("#input-habit").val();
+        var habitId = habit.split(" ").join("");
+        $(".tracker").append(`<div class="created-habit"><div class="habit-name"><p>${habit}</p></div><div class="tracking" id="${habitId}"></div>`);
+        var counter = 0;
+        while (counter < days) {
+          $(`#${habitId}`).append("<p class='check box'>&#9634;</p>");
+          counter += 1;
+        }
+        $(`#${habitId}`).append("<button class='delete'>Delete</button>");
+      }
+      
+      function deleteHabit(){
+        var clicked = event.target;
+        var parent = clicked.parentNode.parentNode;
+        parent.remove();
+      }
+
+      function unCheck(event){
+        var clicked = event.currentTarget;
+        if ($(clicked).text() == "▢") {
+          $(clicked).text("✅");
+        } else {
+          $(clicked).text("▢");
+        }
+      }
+      
+      $(".input").on('click', '.delete', deleteHabit);
+      $(".input").on('click', '.check', unCheck)
+      
+      function changeMonth(){
+        var selectedMonth = $("#select-month").val();
+        if (selectedMonth == "February") {
+          days = 29;
+        } else if (selectedMonth == "April"|| selectedMonth == "June"|| selectedMonth == "September"|| selectedMonth == "November") {
+          days = 30;
+        } else {days= 31;}
+        $("#month-label").text(`${selectedMonth}`);
+        $(".tracker").html("");
+        $("#dates").empty();
+        var counter = 0;
+        while (counter < days) {
+          counter++;
+          $("#dates").append(`<p class='box'>${counter}</p>`);
+          }
+        }
+      
+      function saveHabits(){
+        var currentMonth = $("#month-label").text();
+        var currentHabits = $(".tracker").html();
+        var currentNext = next;
+        var currentDates = $("#dates").html();
+        localStorage.setItem("currentMonth", currentMonth);
+        localStorage.setItem("savedHabits", currentHabits);
+        localStorage.setItem("currentNext", currentNext);
+        localStorage.setItem("currentDates", currentDates);
+      }
+      
+      var savedMonth = localStorage.getItem("currentMonth");
+      var saved = localStorage.getItem("savedHabits");
+      var savedNext = localStorage.getItem("currentNext");
+      var savedDates = localStorage.getItem("currentDates");
+      $(".tracker").append(saved);
+      $("#dates").append(savedDates);
+      next = savedNext;
+      if ($("#month-label").text() == "Month") {
+        $("#month-label").text(savedMonth);
+      }
+      if (savedMonth == "February") {
+          days = 29;
+        } else if (savedMonth == "April"|| savedMonth == "June"|| savedMonth == "September"|| savedMonth == "November") {
+          days = 30;
+        } else {days= 31;}
+      </script>
+  </body>
+</html>

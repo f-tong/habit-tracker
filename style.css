@@ -1,0 +1,136 @@
+body {
+  text-align: center;
+  background-image: url('img/cube-background.jpg');
+  background-size: 100%;
+}
+
+.tab {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  color: black;
+  background-color: white;
+  text-decoration: none;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 3px solid black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.source {
+  font-family: 'Maitree', serif;
+  font-size: 11px;
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.navigation {
+  margin: 30px;
+}
+
+.instructions {
+  background-color: cornsilk;
+  border-radius: 36px;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 700px;
+  margin: auto;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: normal;
+}
+
+p {
+  line-height: 25px;
+  font-family: 'Maitree', serif;
+}
+
+.tracker {
+  width: 1220px;
+}
+
+.tracking {
+  display: flex;
+  width: 1000px;
+  margin: auto;
+}
+
+#date-container {
+  width: 1220px;
+}
+
+#dates {
+  margin-left: 220px;
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+}
+
+#input-habit {
+  margin: 20px;}
+
+.submit {
+  background-color: white;
+  font-family: 'Poppins', sans-serif;
+  border: 3px solid black;
+}
+
+.submit:hover, a:hover {
+  color: #707070;
+}
+
+.created-habit {
+  display: flex;
+  flex-direction: row;
+  width: 1220px;
+  margin: auto;
+  margin-top: -20px;
+}
+
+.habit-name {
+  width: 200px;
+  margin: auto;
+  padding-right: 20px;
+}
+
+.delete {
+  margin: 10px;
+  height: 26px;
+  margin-top: 15px;
+  z-index: 5;
+}
+
+select {
+  background-color: white;
+  font-size: 16px;
+  padding: 3px;
+  }
+
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  color: black;
+}
+
+.input {
+  width: 1220px;
+  margin: auto;
+  background-color: white;
+  padding: 10px;
+  border-radius: 36px;
+}
+
+.check:hover {
+  cursor: pointer;
+}
+
+.box {
+  width: 30px;
+}
